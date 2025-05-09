@@ -7,9 +7,9 @@ from app.models.database import get_db
 router = APIRouter()
 
 @router.post("/orders/", response_model=schemas.Orders)
-def createOrders(orders: schemas.OrdersCreate, db: Session = Depends(get_db)):
-    return crud.createOrders(db=db, orders=orders)
+def create_orders(orders: schemas.OrdersCreate, db: Session = Depends(get_db)):
+    return crud.create_orders(db=db, orders=orders)
 
 @router.get("/orders/", response_model=list[schemas.Orders])
-def getOrders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    return crud.getOrders(db=db, skip=skip, limit=limit)
+def get_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    return crud.get_orders(db=db, skip=skip, limit=limit)
