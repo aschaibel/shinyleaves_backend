@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from app.models import weed as models
-from app.schemas import weed as weed_schema
+from app.schemas import weed as weedSchema
 
-def createWeed(db: Session, weed: weed_schema.WeedCreate):
+def createWeed(db: Session, weed: weedSchema.WeedCreate):
     db_weed = models.Weed(**weed.dict())
     db.add(db_weed)
     db.commit()

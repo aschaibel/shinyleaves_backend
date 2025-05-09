@@ -4,6 +4,7 @@ class CustomerBase(BaseModel):
     name: str
     address: str
     email: str
+    password: str
 
 class CustomerCreate(CustomerBase):
     pass

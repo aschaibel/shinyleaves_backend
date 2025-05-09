@@ -4,15 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import SQLAlchemyError, OperationalError
 from starlette.responses import JSONResponse
 
-
 from app.models.database import Base, engine
-
-from app.models.product import Product
-from app.models.weed import Weed
-from app.models.orders import Orders
-from app.models.customer import Customer
-
-from app.routers import product, weed
+from app.routers import product, weed, orders, customer
 
 app = FastAPI()
 
@@ -45,3 +38,5 @@ async def operational_error_handler(request: Request, exc: OperationalError):
 
 app.include_router(product.router, prefix="/api", tags=["product"])
 app.include_router(weed.router, prefix="/api", tags=["weed"])
+app.include_router(orders.router, prefix="/api", tags=["orders"])
+app.include_router(customer.router, prefix="/api", tags=["customer"])
