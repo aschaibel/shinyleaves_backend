@@ -1,4 +1,3 @@
-from app.models.product import Product
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.crud import product as crud

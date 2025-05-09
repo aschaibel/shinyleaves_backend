@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from app.models import product as models
-from app.schemas import product as schemas
+from app.schemas import product as product_schemas
 
-def createProduct(db: Session, product: schemas.ProductCreate):
+def createProduct(db: Session, product: product_schemas.ProductCreate):
     db_product = models.Product(**product.dict())
     db.add(db_product)
     db.commit()
