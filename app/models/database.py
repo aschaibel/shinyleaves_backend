@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.ext.declarative import declarative_base
 
-DATABASE_URL = "mysql+pymysql://user:password@db:3306/webshop"
+DATABASE_URL = "mysql+pymysql://user:password@127.0.0.1:3306/webshop"
 
 for i in range(10):
     try:

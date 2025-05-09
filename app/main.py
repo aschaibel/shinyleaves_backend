@@ -12,7 +12,7 @@ from app.models.weed import Weed
 from app.models.orders import Orders
 from app.models.customer import Customer
 
-from app.routers import product
+from app.routers import product, weed
 
 app = FastAPI()
 
@@ -44,3 +44,4 @@ async def operational_error_handler(request: Request, exc: OperationalError):
     )
 
 app.include_router(product.router, prefix="/api", tags=["product"])
+app.include_router(weed.router, prefix="/api", tags=["weed"])

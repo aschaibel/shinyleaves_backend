@@ -2,8 +2,8 @@ from pydantic import BaseModel
 
 class WeedBase(BaseModel):
     genetic: str
-    thc: str
-    cbd: str
+    thc: float
+    cbd: float
     effect: str
 
 
