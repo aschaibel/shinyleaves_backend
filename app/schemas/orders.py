@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+
 
 class OrdersBase(BaseModel):
     c_id: int
