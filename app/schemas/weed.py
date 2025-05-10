@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class WeedBase(BaseModel):
     genetic: str
     thc: float
@@ -10,9 +11,8 @@ class WeedBase(BaseModel):
 class WeedCreate(WeedBase):
     pass
 
+
 class Weed(WeedBase):
     w_id: int
 
-    model_config = {
-        "from_attributes": True
-    }
+    model_config = {"from_attributes": True}
