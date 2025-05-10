@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm import Session
 
 from app.models import product as models
@@ -14,10 +14,29 @@ def create_product(db: Session, product: product_schemas.ProductCreate):
         raise HTTPException(status_code=400, detail="Price must be greater than zero")
 
     db_product = models.Product(**product.model_dump())
-    db.add(db_product)
-    db.commit()
-    db.refresh(db_product)
-    return db_product
+    try:
+        db.add(db_product)
+        db.commit()
+        db.refresh(db_product)
+        return db_product
+
+    except IntegrityError as error:
+        db.rollback()
+
+        if hasattr(error.orig, "args") and error.orig.args[0] == 1452:
+            raise HTTPException(
+                status_code=400,
+                detail="Cannot create product: referenced weed ID does not exist",
+            )
+
+        raise HTTPException(status_code=400, detail=f"Integrity: {str(error)}")
+    except SQLAlchemyError as error:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Database error: {str(error)}")
+
+    except Exception as error:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Unknown error: {str(error)}")
 
 
 # Get all products
