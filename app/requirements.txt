@@ -5,3 +5,8 @@ pymysql
 cryptography
 starlette
 pydantic
+email_validator
+python-jose
+python-multipart
+passlib
+bcrypt

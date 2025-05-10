@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 
-from app.models.database import Base
+from app.utils.database import Base
 
 
 class Product(Base):

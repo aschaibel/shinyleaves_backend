@@ -6,8 +6,8 @@ from sqlalchemy.orm import Session
 
 from app.crud import weed as crud
 from app.crud.weed import delete_weed
-from app.models.database import get_db
 from app.schemas import weed as schemas
+from app.utils.database import get_db
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float
 
-from app.models.database import Base
+from app.utils.database import Base
 
 
 class Weed(Base):
