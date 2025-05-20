@@ -54,7 +54,7 @@ def get_weed_by_id(weed_id: int, db: Session = Depends(get_db)):
     except SQLAlchemyError:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Database error occurred while getting weed.",
+            detail="Database error occurred while getting weed id.",
         )
 
 

@@ -44,6 +44,20 @@ def get_products(db: Session, skip: int = 0, limit: int = 10):
     return db.query(models.Product).offset(skip).limit(limit).all()
 
 
+def get_product_by_id(db: Session, p_id: int):
+    try:
+        if not isinstance(p_id, int):
+            raise ValueError("p_id must be an integer")
+        product = db.query(models.Product).filter(models.Product.p_id == p_id).first()
+        if product is None:
+            raise ValueError(f"Product with id {p_id} does not exist")
+        return product
+    except ValueError:
+        raise
+    except Exception as e:
+        raise RuntimeError(f"Failed to get product by id: {str(e)}")
+
+
 # Update an existing product
 def update_products(db: Session, p_id: int, update_data: product_schemas.ProductUpdate):
     try:
