@@ -4,8 +4,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import models  # noqa: F401
-from app.models.database import Base, engine
-from app.routers import product, weed, orders, customer
+from app.routers import product, weed, orders, customer, auth
+from app.utils.database import Base, engine
 
 
 @asynccontextmanager
@@ -29,3 +29,4 @@ app.include_router(weed.router, prefix="/api", tags=["weed"])
 app.include_router(orders.router, prefix="/api", tags=["orders"])
 app.include_router(customer.router, prefix="/api", tags=["customer"])
 app.include_router(product.router, prefix="/api", tags=["product"])
+app.include_router(auth.router, prefix="/api", tags=["auth"])

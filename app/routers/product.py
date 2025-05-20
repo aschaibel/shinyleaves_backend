@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 
 from app.crud import product as crud
 from app.crud.product import delete_product_by_id
-from app.models.database import get_db
 from app.schemas import product as schemas
+from app.utils.database import get_db
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, Float, ForeignKey
 
-from app.models.database import Base
+from app.utils.database import Base
 
 
 class Orders(Base):
