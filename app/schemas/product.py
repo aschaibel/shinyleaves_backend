@@ -7,6 +7,7 @@ class ProductBase(BaseModel):
     name: str
     price: float
     w_id: int
+    slug: Optional[str] = None
 
 
 class ProductCreate(ProductBase):
@@ -16,6 +17,7 @@ class ProductCreate(ProductBase):
 class ProductUpdate(BaseModel):
     name: Optional[str]
     price: Optional[float]
+    slug: Optional[str]
 
 
 class Product(ProductBase):

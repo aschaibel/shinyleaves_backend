@@ -10,6 +10,7 @@ class Product(Base):
     name = Column(String(255), nullable=False)
     price = Column(Float, nullable=False)
     w_id = Column(Integer, ForeignKey("weed.w_id"), nullable=False)
+    slug = Column(String(255), nullable=True)
 
 
 class ProductBase(BaseModel):
@@ -18,3 +19,4 @@ class ProductBase(BaseModel):
     )
     price: float = Field(..., gt=0, description="Price must be greater than 0")
     w_id: int
+    slug: str = Field(None, description="Path to the product picture")
