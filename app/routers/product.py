@@ -1,6 +1,7 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi import APIRouter, Depends, HTTPException, Response, status
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.crud import product as crud
@@ -21,6 +22,16 @@ def create_products(
 @router.get("/products/", response_model=list[schemas.Product])
 def get_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return crud.get_products(db=db, skip=skip, limit=limit)
+
+@router.get("/products/{product_id}", response_model=schemas.Product)
+def get_product_by_id(product_id: int, db: Session = Depends(get_db)):
+    try:
+        return crud.get_product_by_id(db=db, p_id=product_id)
+    except SQLAlchemyError:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Database error occured while getting product id."
+        )
 
 
 @router.patch("/products/{product_id}", response_model=schemas.Product)
