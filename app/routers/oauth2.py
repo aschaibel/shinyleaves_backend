@@ -9,7 +9,7 @@ from app import models
 from app.schemas import customer as schemas
 from app.utils.database import get_db
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/login")
 
 SECRET_KEY = "123456"
 ALGORITHM = "HS256"

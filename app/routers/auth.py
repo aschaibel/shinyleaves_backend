@@ -1,6 +1,4 @@
 from fastapi import APIRouter, HTTPException, status, Depends
-from fastapi.security import OAuth2PasswordRequestForm
-from pydantic import validate_email
 from sqlalchemy.orm import Session
 
 from app import models
@@ -32,28 +30,30 @@ def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(ge
     return new_customer
 
 
-@router.post("/login")
+@router.post("/login", response_model=dict)
 def customer_login(
-    user_cred: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
+    user_cred: schemas.CustomerLogin, db: Session = Depends(get_db)
 ):
-    try:
-        validate_email(user_cred.username)
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid email format")
+    # Email validation is handled by Pydantic's EmailStr
+    # Additional validation can be added here if needed
 
+    # Check if email exists in the database
     customer = (
         db.query(models.Customer)
-        .filter(models.Customer.email == user_cred.username)
+        .filter(models.Customer.email == user_cred.email)
         .first()
     )
     if not customer:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Credentials"
-        )
-    if not verify_password(user_cred.password, customer.password):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Invalid Credentials"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password"
         )
 
+    # Validate password
+    if not verify_password(user_cred.password, customer.password):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Invalid email or password"
+        )
+
+    # Generate access token
     access_token = oauth2.create_access_token(data={"customer_id": customer.c_id})
     return {"access_token": access_token, "token_type": "bearer"}
