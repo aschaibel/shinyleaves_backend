@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import models  # noqa: F401
-from app.routers import product, weed, orders, customer, auth
+from app.routers import product, weed, order, customer, auth
 from app.utils.database import Base, engine
 
 
@@ -26,7 +26,7 @@ app.add_middleware(
 
 
 app.include_router(weed.router, prefix="/api", tags=["weed"])
-app.include_router(orders.router, prefix="/api", tags=["orders"])
+app.include_router(order.router, prefix="/api", tags=["order"])
 app.include_router(customer.router, prefix="/api", tags=["customer"])
 app.include_router(product.router, prefix="/api", tags=["product"])
-app.include_router(auth.router, prefix="/api", tags=["auth"])
+app.include_router(auth.router, prefix="/api", tags=["authentication"])

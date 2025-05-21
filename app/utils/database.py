@@ -49,5 +49,3 @@ def get_db():
     finally:
         db.close()
 
-
-# def get_api_key(db: Session, )

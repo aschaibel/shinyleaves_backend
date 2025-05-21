@@ -15,7 +15,7 @@ The ShinyLeaves database consists of the following main tables:
 
 ```
 +-------------+       +-------------+       +-------------+       +-------------+
-|   Product   |       |    Weed     |       |   Orders    |       |  Customer   |
+|   Product   |       |    Weed     |       |   Order     |       |  Customer   |
 +-------------+       +-------------+       +-------------+       +-------------+
 | p_id (PK)   |       | w_id (PK)   |       | o_id (PK)   |       | c_id (PK)   |
 | name        |       | name        |       | c_id (FK)   |-------| name        |
@@ -66,7 +66,7 @@ The Weed table stores information about different weed strains.
 | description | Text | Description of the weed strain | Nullable |
 | image | String(255) | Path to the weed strain image | Nullable |
 
-### Orders
+### Order
 
 The Orders table stores information about customer orders.
 
