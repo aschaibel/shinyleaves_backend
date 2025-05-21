@@ -37,7 +37,6 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DB_DRIVER=mysql+pymysql
       - DB_USER=user
       - DB_PASSWORD=password
       - DB_HOST=db
