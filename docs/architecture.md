@@ -26,7 +26,7 @@ ShinyLeaves follows a layered architecture pattern, which separates concerns and
 │  │                      API Layer (Routers)                 │   │
 │  │                                                         │   │
 │  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Orders  │   │Customer │  │   │
+│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
 │  │  │ Router  │   │ Router  │   │ Router  │   │ Router  │  │   │
 │  │  └────┬────┘   └────┬────┘   └────┬────┘   └────┬────┘  │   │
 │  └───────┼──────────────┼──────────────┼──────────────┼────┘   │
@@ -36,7 +36,7 @@ ShinyLeaves follows a layered architecture pattern, which separates concerns and
 │  │               Business Logic Layer (CRUD)                │   │
 │  │                                                         │   │
 │  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Orders  │   │Customer │  │   │
+│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
 │  │  │  CRUD   │   │  CRUD   │   │  CRUD   │   │  CRUD   │  │   │
 │  │  └────┬────┘   └────┬────┘   └────┬────┘   └────┬────┘  │   │
 │  └───────┼──────────────┼──────────────┼──────────────┼────┘   │
@@ -46,7 +46,7 @@ ShinyLeaves follows a layered architecture pattern, which separates concerns and
 │  │                 Data Access Layer (Models)               │   │
 │  │                                                         │   │
 │  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Orders  │   │Customer │  │   │
+│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
 │  │  │  Model  │   │  Model  │   │  Model  │   │  Model  │  │   │
 │  │  └─────────┘   └─────────┘   └─────────┘   └─────────┘  │   │
 │  └─────────────────────────────────────────────────────────┘   │
@@ -55,7 +55,7 @@ ShinyLeaves follows a layered architecture pattern, which separates concerns and
 │  │                     Schema Layer                         │   │
 │  │                                                         │   │
 │  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Orders  │   │Customer │  │   │
+│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
 │  │  │ Schema  │   │ Schema  │   │ Schema  │   │ Schema  │  │   │
 │  │  └─────────┘   └─────────┘   └─────────┘   └─────────┘  │   │
 │  └─────────────────────────────────────────────────────────┘   │

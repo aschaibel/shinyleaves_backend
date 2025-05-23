@@ -125,12 +125,12 @@ The API provides the following endpoints:
 - `PATCH /api/weed/{weed_id}`: Update weed strain
 - `DELETE /api/weed/{weed_id}`: Delete weed strain
 
-### Orders
-- `GET /api/orders/`: Get list of orders
-- `GET /api/orders/{order_id}`: Get order by ID
-- `POST /api/orders/`: Create new order
-- `PATCH /api/orders/{order_id}`: Update order
-- `DELETE /api/orders/{order_id}`: Delete order
+### Order
+- `GET /api/order/`: Get list of orders
+- `GET /api/order/{order_id}`: Get order by ID
+- `POST /api/order/`: Create new order
+- `PATCH /api/order/{order_id}`: Update order
+- `DELETE /api/order/{order_id}`: Delete order
 
 ### Customers
 - `GET /api/customer/`: Get list of customers
