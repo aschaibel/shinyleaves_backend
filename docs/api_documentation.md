@@ -29,15 +29,6 @@ The ShinyLeaves API is organized around the following resources:
 | PATCH | /api/products/{product_id} | Update a product |
 | DELETE | /api/products/{product_id} | Delete a product |
 
-### Weed Strains
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /api/weed/ | Get a list of weed strains with pagination |
-| GET | /api/weed/{weed_id} | Get a weed strain by ID |
-| POST | /api/weed/ | Create multiple weed strains |
-| PATCH | /api/weed/{weed_id} | Update a weed strain |
-| DELETE | /api/weed/{weed_id} | Delete a weed strain |
 
 ### Orders
 
@@ -115,14 +106,20 @@ Host: localhost:8000
     "p_id": 1,
     "name": "Premium Indica",
     "price": 29.99,
-    "w_id": 1,
+    "genetic": "Indica",
+    "thc": 18.5,
+    "cbd": 0.2,
+    "effect": "Relaxing",
     "slug": "premium-indica"
   },
   {
     "p_id": 2,
     "name": "Sativa Delight",
     "price": 24.99,
-    "w_id": 2,
+    "genetic": "Sativa",
+    "thc": 22.0,
+    "cbd": 0.1,
+    "effect": "Energizing",
     "slug": "sativa-delight"
   }
 ]
@@ -141,7 +138,10 @@ Authorization: Bearer <your_token>
   {
     "name": "New Product",
     "price": 19.99,
-    "w_id": 1,
+    "genetic": "Hybrid",
+    "thc": 20.0,
+    "cbd": 0.5,
+    "effect": "Balanced",
     "slug": "new-product"
   }
 ]
@@ -154,7 +154,10 @@ Authorization: Bearer <your_token>
     "p_id": 3,
     "name": "New Product",
     "price": 19.99,
-    "w_id": 1,
+    "genetic": "Hybrid",
+    "thc": 20.0,
+    "cbd": 0.5,
+    "effect": "Balanced",
     "slug": "new-product"
   }
 ]
@@ -170,7 +173,8 @@ Content-Type: application/json
 Authorization: Bearer <your_token>
 
 {
-  "price": 22.99
+  "price": 22.99,
+  "thc": 21.5
 }
 ```
 
@@ -180,7 +184,10 @@ Authorization: Bearer <your_token>
   "p_id": 3,
   "name": "New Product",
   "price": 22.99,
-  "w_id": 1,
+  "genetic": "Hybrid",
+  "thc": 21.5,
+  "cbd": 0.5,
+  "effect": "Balanced",
   "slug": "new-product"
 }
 ```

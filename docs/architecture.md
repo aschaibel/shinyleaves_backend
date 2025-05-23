@@ -25,39 +25,39 @@ ShinyLeaves follows a layered architecture pattern, which separates concerns and
 │  ┌─────────────────────────────────────────────────────────┐   │
 │  │                      API Layer (Routers)                 │   │
 │  │                                                         │   │
-│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
-│  │  │ Router  │   │ Router  │   │ Router  │   │ Router  │  │   │
-│  │  └────┬────┘   └────┬────┘   └────┬────┘   └────┬────┘  │   │
-│  └───────┼──────────────┼──────────────┼──────────────┼────┘   │
-│          │              │              │              │        │
-│          ▼              ▼              ▼              ▼        │
+│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
+│  │  │ Product │   │ Order   │   │Customer │  │   │
+│  │  │ Router  │   │ Router  │   │ Router  │  │   │
+│  │  └────┬────┘   └────┬────┘   └────┬────┘  │   │
+│  └───────┼──────────────┼──────────────┼────────────────┘   │
+│          │              │              │                     │
+│          ▼              ▼              ▼                     │
 │  ┌─────────────────────────────────────────────────────────┐   │
 │  │               Business Logic Layer (CRUD)                │   │
 │  │                                                         │   │
-│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
-│  │  │  CRUD   │   │  CRUD   │   │  CRUD   │   │  CRUD   │  │   │
-│  │  └────┬────┘   └────┬────┘   └────┬────┘   └────┬────┘  │   │
-│  └───────┼──────────────┼──────────────┼──────────────┼────┘   │
-│          │              │              │              │        │
-│          ▼              ▼              ▼              ▼        │
+│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
+│  │  │ Product │   │ Order   │   │Customer │  │   │
+│  │  │  CRUD   │   │  CRUD   │   │  CRUD   │  │   │
+│  │  └────┬────┘   └────┬────┘   └────┬────┘  │   │
+│  └───────┼──────────────┼──────────────┼────────────────┘   │
+│          │              │              │                     │
+│          ▼              ▼              ▼                     │
 │  ┌─────────────────────────────────────────────────────────┐   │
 │  │                 Data Access Layer (Models)               │   │
 │  │                                                         │   │
-│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
-│  │  │  Model  │   │  Model  │   │  Model  │   │  Model  │  │   │
-│  │  └─────────┘   └─────────┘   └─────────┘   └─────────┘  │   │
+│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
+│  │  │ Product │   │ Order   │   │Customer │  │   │
+│  │  │  Model  │   │  Model  │   │  Model  │  │   │
+│  │  └─────────┘   └─────────┘   └─────────┘  │   │
 │  └─────────────────────────────────────────────────────────┘   │
 │                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐   │
 │  │                     Schema Layer                         │   │
 │  │                                                         │   │
-│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
-│  │  │ Product │   │  Weed   │   │ Order   │   │Customer │  │   │
-│  │  │ Schema  │   │ Schema  │   │ Schema  │   │ Schema  │  │   │
-│  │  └─────────┘   └─────────┘   └─────────┘   └─────────┘  │   │
+│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐  │   │
+│  │  │ Product │   │ Order   │   │Customer │  │   │
+│  │  │ Schema  │   │ Schema  │   │ Schema  │  │   │
+│  │  └─────────┘   └─────────┘   └─────────┘  │   │
 │  └─────────────────────────────────────────────────────────┘   │
 │                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐   │
@@ -83,7 +83,7 @@ ShinyLeaves follows a layered architecture pattern, which separates concerns and
 The API layer is responsible for handling HTTP requests and responses. It defines the API endpoints and their behavior.
 
 **Key Components:**
-- **Router Modules**: Define API endpoints for different resources (products, weed, orders, customers, auth)
+- **Router Modules**: Define API endpoints for different resources (products, orders, customers, auth)
 - **Request Handling**: Parse request parameters, body, and headers
 - **Response Formatting**: Format responses according to API specifications
 - **Error Handling**: Handle and format errors that occur during request processing
@@ -141,7 +141,10 @@ class Product(Base):
     p_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(255), nullable=False)
     price = Column(Float, nullable=False)
-    w_id = Column(Integer, ForeignKey("weed.w_id"), nullable=False)
+    genetic = Column(String(255), nullable=False)
+    thc = Column(Float, nullable=False)
+    cbd = Column(Float, nullable=False)
+    effect = Column(String(255), nullable=False)
     slug = Column(String(255), nullable=True)
 ```
 
@@ -159,7 +162,10 @@ The schema layer defines data validation and serialization/deserialization using
 class ProductBase(BaseModel):
     name: str
     price: float
-    w_id: int
+    genetic: str
+    thc: float
+    cbd: float
+    effect: str
     slug: Optional[str] = None
 
 class ProductCreate(ProductBase):

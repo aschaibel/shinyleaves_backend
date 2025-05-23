@@ -13,12 +13,18 @@ class ProductBase(BaseModel):
     Attributes:
         name (str): Name of the product.
         price (float): Price of the product.
-        w_id (int): Foreign key to the weed table.
+        genetic (str): Genetic information of the weed.
+        thc (float): THC content of the weed.
+        cbd (float): CBD content of the weed.
+        effect (str): Effect of the weed.
         slug (Optional[str]): Path to the product picture (optional).
     """
     name: str
     price: float
-    w_id: int
+    genetic: str
+    thc: float
+    cbd: float
+    effect: str
     slug: Optional[str] = None
 
 
@@ -45,10 +51,18 @@ class ProductUpdate(BaseModel):
     Attributes:
         name (Optional[str]): Updated name of the product (optional).
         price (Optional[float]): Updated price of the product (optional).
+        genetic (Optional[str]): Updated genetic information of the weed (optional).
+        thc (Optional[float]): Updated THC content of the weed (optional).
+        cbd (Optional[float]): Updated CBD content of the weed (optional).
+        effect (Optional[str]): Updated effect of the weed (optional).
         slug (Optional[str]): Updated path to the product picture (optional).
     """
     name: Optional[str]
     price: Optional[float]
+    genetic: Optional[str]
+    thc: Optional[float]
+    cbd: Optional[float]
+    effect: Optional[str]
     slug: Optional[str]
 
 
