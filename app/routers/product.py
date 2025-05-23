@@ -75,7 +75,7 @@ def get_product_by_id(product_id: int, db: Session = Depends(get_db)):
 
 
 @router.patch("/products/{product_id}", response_model=schemas.Product)
-def patch_product(
+def patch_product_by_id(
     product_id: int, update_data: schemas.ProductUpdate, db: Session = Depends(get_db)
 ):
     """

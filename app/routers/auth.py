@@ -12,6 +12,21 @@ router = APIRouter()
 
 @router.post("/register", response_model=schemas.Customer)
 def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
+    """
+    Register a new customer.
+
+    This endpoint allows creating a new customer account.
+
+    Args:
+        customer (schemas.CustomerCreate): Customer data including email and password.
+        db (Session, optional): Database session. Defaults to Depends(get_db).
+
+    Returns:
+        schemas.Customer: The created customer with its ID.
+
+    Raises:
+        HTTPException: If the email is already registered.
+    """
     # Check for existing email
     existing = (
         db.query(models.Customer)
@@ -34,6 +49,21 @@ def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(ge
 def customer_login(
     user_cred: schemas.CustomerLogin, db: Session = Depends(get_db)
 ):
+    """
+    Customer login.
+
+    This endpoint authenticates a customer and returns an access token.
+
+    Args:
+        user_cred (schemas.CustomerLogin): Customer credentials (email and password).
+        db (Session, optional): Database session. Defaults to Depends(get_db).
+
+    Returns:
+        dict: A dictionary containing the access token and token type.
+
+    Raises:
+        HTTPException: If the email doesn't exist or the password is incorrect.
+    """
     # Email validation is handled by Pydantic's EmailStr
     # Additional validation can be added here if needed
 
