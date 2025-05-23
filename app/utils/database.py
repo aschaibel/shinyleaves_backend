@@ -7,6 +7,10 @@ from sqlalchemy import text
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Get database credentials from environment variables with defaults
 DB_USER = os.getenv("DB_USER", "user")
