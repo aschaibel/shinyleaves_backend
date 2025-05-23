@@ -43,7 +43,7 @@ def get_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return crud.get_order(db=db, skip=skip, limit=limit)
 
 
-@router.get("/order/{order_id}", response_model=schemas.Order)
+@router.get("/orders/{order_id}", response_model=schemas.Order)
 def get_order_by_id(order_id: int, db: Session = Depends(get_db)):
     """
     Get an order by ID.
