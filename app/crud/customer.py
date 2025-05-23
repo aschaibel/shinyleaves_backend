@@ -16,3 +16,7 @@ def create_customer(db: Session, customer: customer_schemas.CustomerCreate):
 
 def get_customer(db: Session, skip: int = 0, limit: int = 10):
     return db.query(models.Customer).offset(skip).limit(limit).all()
+
+
+def get_customer_by_id(db: Session, customer_id: int):
+    return db.query(models.Customer).filter(models.Customer.c_id == customer_id).first()
