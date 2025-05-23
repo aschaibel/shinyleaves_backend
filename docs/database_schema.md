@@ -6,65 +6,57 @@ This document provides an overview of the database schema used in the ShinyLeave
 
 The ShinyLeaves database consists of the following main tables:
 
-- **Product**: Stores information about products
-- **Weed**: Stores information about weed strains
+- **Product**: Stores information about products, including weed-related attributes
 - **Order**: Stores information about customer orders
 - **Customer**: Stores information about customers
 
 ## Entity Relationship Diagram
 
 ```
-+-------------+       +-------------+       +-------------+       +-------------+
-|   Product   |       |    Weed     |       |   Order     |       |  Customer   |
-+-------------+       +-------------+       +-------------+       +-------------+
-| p_id (PK)   |       | w_id (PK)   |       | o_id (PK)   |       | c_id (PK)   |
-| name        |       | name        |       | c_id (FK)   |-------| name        |
-| price       |       | type        |       | p_id (FK)   |----+  | email       |
-| w_id (FK)   |-------| thc         |       | quantity    |    |  | password    |
-| slug        |       | cbd         |       | total_price |    |  | address     |
-+-------------+       | description |       | status      |    |  +-------------+
-                      | image       |       +-------------+    |
-                      +-------------+                          |
-                                                              |
-                                                              |
-                                                     +-------------+
-                                                     |   Product   |
-                                                     +-------------+
-                                                     | p_id (PK)   |
-                                                     | name        |
-                                                     | price       |
-                                                     | w_id (FK)   |
-                                                     | slug        |
-                                                     +-------------+
++-------------+       +-------------+       +-------------+
+|   Product   |       |   Order     |       |  Customer   |
++-------------+       +-------------+       +-------------+
+| p_id (PK)   |       | o_id (PK)   |       | c_id (PK)   |
+| name        |       | c_id (FK)   |-------| name        |
+| price       |       | p_id (FK)   |----+  | email       |
+| genetic     |       | quantity    |    |  | password    |
+| thc         |       | total_price |    |  | address     |
+| cbd         |       | status      |    |  +-------------+
+| effect      |       +-------------+    |
+| slug        |                          |
++-------------+                          |
+                                         |
+                                         |
+                                +-------------+
+                                |   Product   |
+                                +-------------+
+                                | p_id (PK)   |
+                                | name        |
+                                | price       |
+                                | genetic     |
+                                | thc         |
+                                | cbd         |
+                                | effect      |
+                                | slug        |
+                                +-------------+
 ```
 
 ## Table Descriptions
 
 ### Product
 
-The Product table stores information about products available in the store.
+The Product table stores information about products available in the store, including weed-related attributes.
 
 | Column | Type | Description | Constraints |
 |--------|------|-------------|------------|
 | p_id | Integer | Unique identifier for the product | Primary Key, Auto-increment |
 | name | String(255) | Name of the product | Not Null |
 | price | Float | Price of the product | Not Null |
-| w_id | Integer | Foreign key to the Weed table | Foreign Key, Not Null |
+| genetic | String(255) | Genetic information of the weed | Not Null |
+| thc | Float | THC content of the weed | Not Null |
+| cbd | Float | CBD content of the weed | Not Null |
+| effect | String(255) | Effect of the weed | Not Null |
 | slug | String(255) | Path to the product picture | Nullable |
-
-### Weed
-
-The Weed table stores information about different weed strains.
-
-| Column | Type | Description | Constraints |
-|--------|------|-------------|------------|
-| w_id | Integer | Unique identifier for the weed strain | Primary Key, Auto-increment |
-| name | String(255) | Name of the weed strain | Not Null |
-| type | String(50) | Type of the weed (e.g., Indica, Sativa, Hybrid) | Not Null |
-| thc | Float | THC percentage | Not Null |
-| cbd | Float | CBD percentage | Not Null |
-| description | Text | Description of the weed strain | Nullable |
-| image | String(255) | Path to the weed strain image | Nullable |
 
 ### Order
 
@@ -93,22 +85,18 @@ The Customer table stores information about customers.
 
 ## Relationships
 
-1. **Product to Weed**: Many-to-One
-   - A product belongs to one weed strain
-   - A weed strain can have multiple products
-
-2. **Order to Customer**: Many-to-One
+1. **Order to Customer**: Many-to-One
    - An order belongs to one customer
    - A customer can have multiple orders
 
-3. **Order to Product**: Many-to-One
+2. **Order to Product**: Many-to-One
    - An order contains one product (in a specific quantity)
    - A product can be in multiple orders
 
 ## Indexes
 
-- Primary keys on all tables (p_id, w_id, o_id, c_id)
-- Foreign key indexes (w_id in Product, c_id and p_id in Order)
+- Primary keys on all tables (p_id, o_id, c_id)
+- Foreign key indexes (c_id and p_id in Order)
 - Email index in Customer table for quick lookups
 
 ## Notes
