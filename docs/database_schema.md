@@ -8,7 +8,7 @@ The ShinyLeaves database consists of the following main tables:
 
 - **Product**: Stores information about products
 - **Weed**: Stores information about weed strains
-- **Orders**: Stores information about customer orders
+- **Order**: Stores information about customer orders
 - **Customer**: Stores information about customers
 
 ## Entity Relationship Diagram
@@ -68,7 +68,7 @@ The Weed table stores information about different weed strains.
 
 ### Order
 
-The Orders table stores information about customer orders.
+The Order table stores information about customer orders.
 
 | Column | Type | Description | Constraints |
 |--------|------|-------------|------------|
@@ -97,18 +97,18 @@ The Customer table stores information about customers.
    - A product belongs to one weed strain
    - A weed strain can have multiple products
 
-2. **Orders to Customer**: Many-to-One
+2. **Order to Customer**: Many-to-One
    - An order belongs to one customer
    - A customer can have multiple orders
 
-3. **Orders to Product**: Many-to-One
+3. **Order to Product**: Many-to-One
    - An order contains one product (in a specific quantity)
    - A product can be in multiple orders
 
 ## Indexes
 
 - Primary keys on all tables (p_id, w_id, o_id, c_id)
-- Foreign key indexes (w_id in Product, c_id and p_id in Orders)
+- Foreign key indexes (w_id in Product, c_id and p_id in Order)
 - Email index in Customer table for quick lookups
 
 ## Notes
