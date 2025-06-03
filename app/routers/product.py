@@ -6,6 +6,8 @@ from sqlalchemy.orm import Session
 
 from app.crud import product as crud
 from app.crud.product import delete_product_by_id
+from app.models.customer import Customer
+from app.routers.oauth2 import get_admin_user
 from app.schemas import product as schemas
 from app.utils.database import get_db
 
@@ -14,16 +16,20 @@ router = APIRouter()
 
 @router.post("/products/", response_model=List[schemas.Product])
 def create_products(
-    product: List[schemas.ProductCreate], db: Session = Depends(get_db)
+    product: List[schemas.ProductCreate], 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_admin_user)
 ):
     """
     Create multiple products.
 
     This endpoint allows creating multiple products in a single request.
+    Requires admin privileges.
 
     Args:
         product (List[schemas.ProductCreate]): List of products to create.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated admin user.
 
     Returns:
         List[schemas.Product]: List of created products with their IDs.
@@ -76,17 +82,22 @@ def get_product_by_id(product_id: int, db: Session = Depends(get_db)):
 
 @router.patch("/products/{product_id}", response_model=schemas.Product)
 def patch_product_by_id(
-    product_id: int, update_data: schemas.ProductUpdate, db: Session = Depends(get_db)
+    product_id: int, 
+    update_data: schemas.ProductUpdate, 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_admin_user)
 ):
     """
     Update a product.
 
     This endpoint allows partial updates to a product.
+    Requires admin privileges.
 
     Args:
         product_id (int): ID of the product to update.
         update_data (schemas.ProductUpdate): Data to update the product with.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated admin user.
 
     Returns:
         schemas.Product: The updated product.
@@ -101,15 +112,21 @@ def patch_product_by_id(
 
 
 @router.delete("/products/{product_id}")
-async def remove_product_by_id(product_id: int, db: Session = Depends(get_db)):
+async def remove_product_by_id(
+    product_id: int, 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_admin_user)
+):
     """
     Delete a product.
 
     This endpoint deletes a product by its ID.
+    Requires admin privileges.
 
     Args:
         product_id (int): ID of the product to delete.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated admin user.
 
     Returns:
         Response: Empty response with 204 status code if successful.

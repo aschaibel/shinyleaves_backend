@@ -38,7 +38,11 @@ def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(ge
 
     hashed_password = password_hash(customer.password)
     customer.password = hashed_password
-    new_customer = models.Customer(**customer.model_dump())
+
+    # Create a new customer with is_admin explicitly set to False
+    customer_data = customer.model_dump()
+    new_customer = models.Customer(**customer_data, is_admin=False)
+
     db.add(new_customer)
     db.commit()
     db.refresh(new_customer)

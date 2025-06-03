@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.crud import order as crud
+from app.models.customer import Customer
+from app.routers.oauth2 import get_current_user
 from app.schemas import order as schemas
 from app.utils.database import get_db
 
@@ -9,7 +11,11 @@ router = APIRouter()
 
 
 @router.post("/order/", response_model=schemas.Order)
-def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
+def create_order(
+    order: schemas.OrderCreate, 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_current_user)
+):
     """
     Create a new order.
 
@@ -18,6 +24,7 @@ def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
     Args:
         order (schemas.OrderCreate): Order data to create.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated user.
 
     Returns:
         schemas.Order: The created order with its ID.
@@ -26,7 +33,12 @@ def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/orders/", response_model=list[schemas.Order])
-def get_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def get_orders(
+    skip: int = 0, 
+    limit: int = 10, 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_current_user)
+):
     """
     Get a list of orders with pagination.
 
@@ -36,6 +48,7 @@ def get_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
         skip (int, optional): Number of orders to skip. Defaults to 0.
         limit (int, optional): Maximum number of orders to return. Defaults to 10.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated user.
 
     Returns:
         list[schemas.Order]: List of orders.
@@ -44,7 +57,11 @@ def get_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
 
 
 @router.get("/orders/{order_id}", response_model=schemas.Order)
-def get_order_by_id(order_id: int, db: Session = Depends(get_db)):
+def get_order_by_id(
+    order_id: int, 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_current_user)
+):
     """
     Get an order by ID.
 
@@ -53,6 +70,7 @@ def get_order_by_id(order_id: int, db: Session = Depends(get_db)):
     Args:
         order_id (int): ID of the order to retrieve.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated user.
 
     Returns:
         schemas.Order: The requested order.
