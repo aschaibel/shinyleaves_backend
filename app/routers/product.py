@@ -12,7 +12,7 @@ from app.utils.database import get_db
 router = APIRouter()
 
 
-@router.post("/products/", response_model=List[schemas.Product])
+@router.post("/products/", response_model=List[schemas.Product], status_code=status.HTTP_201_CREATED)
 def create_products(
     product: List[schemas.ProductCreate], db: Session = Depends(get_db)
 ):
@@ -27,6 +27,56 @@ def create_products(
 
     Returns:
         List[schemas.Product]: List of created products with their IDs.
+
+    Example:
+        ```
+        # Request
+        POST /api/products/
+        [
+            {
+                "name": "New Hybrid Strain",
+                "price": 27.99,
+                "genetic": "Hybrid",
+                "thc": 20.0,
+                "cbd": 0.5,
+                "effect": "Balanced",
+                "slug": "new-hybrid-strain"
+            },
+            {
+                "name": "CBD Special",
+                "price": 32.99,
+                "genetic": "Indica",
+                "thc": 5.0,
+                "cbd": 15.0,
+                "effect": "Therapeutic",
+                "slug": "cbd-special"
+            }
+        ]
+
+        # Response (201 Created)
+        [
+            {
+                "p_id": 3,
+                "name": "New Hybrid Strain",
+                "price": 27.99,
+                "genetic": "Hybrid",
+                "thc": 20.0,
+                "cbd": 0.5,
+                "effect": "Balanced",
+                "slug": "new-hybrid-strain"
+            },
+            {
+                "p_id": 4,
+                "name": "CBD Special",
+                "price": 32.99,
+                "genetic": "Indica",
+                "thc": 5.0,
+                "cbd": 15.0,
+                "effect": "Therapeutic",
+                "slug": "cbd-special"
+            }
+        ]
+        ```
     """
     return [crud.create_product(db=db, product=p) for p in product]
 
@@ -45,6 +95,36 @@ def get_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
 
     Returns:
         list[schemas.Product]: List of products.
+
+    Example:
+        ```
+        # Request
+        GET /api/products/?skip=0&limit=2
+
+        # Response (200 OK)
+        [
+            {
+                "p_id": 1,
+                "name": "Premium Indica",
+                "price": 29.99,
+                "genetic": "Indica",
+                "thc": 18.5,
+                "cbd": 0.2,
+                "effect": "Relaxing",
+                "slug": "premium-indica"
+            },
+            {
+                "p_id": 2,
+                "name": "Sativa Delight",
+                "price": 24.99,
+                "genetic": "Sativa",
+                "thc": 22.0,
+                "cbd": 0.1,
+                "effect": "Energizing",
+                "slug": "sativa-delight"
+            }
+        ]
+        ```
     """
     return crud.get_products(db=db, skip=skip, limit=limit)
 
