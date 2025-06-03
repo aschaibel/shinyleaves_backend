@@ -41,6 +41,18 @@ from sqlalchemy.exc import SQLAlchemyError
 
 
 def get_db():
+    """
+    Get a database session.
+
+    This function creates a new database session for each request and closes it when the request is done.
+    It is used as a dependency in FastAPI route functions.
+
+    Yields:
+        Session: A SQLAlchemy database session.
+
+    Raises:
+        HTTPException: If a database error occurs during the request.
+    """
     db = SessionLocal()
     try:
         yield db
@@ -52,4 +64,3 @@ def get_db():
         )
     finally:
         db.close()
-
