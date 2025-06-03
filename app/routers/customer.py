@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.crud import customer as crud
+from app.models.customer import Customer
+from app.routers.oauth2 import get_admin_user
 from app.schemas import customer as schemas
 from app.utils.database import get_db
 
@@ -9,16 +11,23 @@ router = APIRouter()
 
 
 @router.get("/customers/", response_model=list[schemas.Customer])
-def get_customers(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def get_customers(
+    skip: int = 0, 
+    limit: int = 10, 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_admin_user)
+):
     """
     Get a list of customers with pagination.
 
     This endpoint returns a paginated list of customers.
+    Requires admin privileges.
 
     Args:
         skip (int, optional): Number of customers to skip. Defaults to 0.
         limit (int, optional): Maximum number of customers to return. Defaults to 10.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated admin user.
 
     Returns:
         list[schemas.Customer]: List of customers.
@@ -27,15 +36,21 @@ def get_customers(skip: int = 0, limit: int = 10, db: Session = Depends(get_db))
 
 
 @router.get("/customers/{customer_id}", response_model=schemas.Customer)
-def get_customer_by_id(customer_id: int, db: Session = Depends(get_db)):
+def get_customer_by_id(
+    customer_id: int, 
+    db: Session = Depends(get_db),
+    current_user: Customer = Depends(get_admin_user)
+):
     """
     Get a customer by ID.
 
     This endpoint returns a single customer by its ID.
+    Requires admin privileges.
 
     Args:
         customer_id (int): ID of the customer to retrieve.
         db (Session, optional): Database session. Defaults to Depends(get_db).
+        current_user (Customer): The authenticated admin user.
 
     Returns:
         schemas.Customer: The requested customer.
