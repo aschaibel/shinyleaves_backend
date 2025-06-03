@@ -10,7 +10,7 @@ from app.utils.password import verify_password, password_hash
 router = APIRouter()
 
 
-@router.post("/register", response_model=schemas.Customer)
+@router.post("/register", response_model=schemas.Customer, status_code=status.HTTP_201_CREATED)
 def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
     """
     Register a new customer.
@@ -26,6 +26,30 @@ def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(ge
 
     Raises:
         HTTPException: If the email is already registered.
+
+    Example:
+        ```
+        # Request
+        POST /api/register
+        {
+            "email": "user@example.com",
+            "password": "securepassword123",
+            "first_name": "John",
+            "last_name": "Doe",
+            "phone": "+1234567890",
+            "address": "123 Main St, City"
+        }
+
+        # Response (201 Created)
+        {
+            "c_id": 1,
+            "email": "user@example.com",
+            "first_name": "John",
+            "last_name": "Doe",
+            "phone": "+1234567890",
+            "address": "123 Main St, City"
+        }
+        ```
     """
     # Check for existing email
     existing = (
@@ -49,7 +73,7 @@ def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(ge
     return new_customer
 
 
-@router.post("/login", response_model=dict)
+@router.post("/login", response_model=dict, status_code=status.HTTP_200_OK)
 def customer_login(
     user_cred: schemas.CustomerLogin, db: Session = Depends(get_db)
 ):
@@ -57,6 +81,7 @@ def customer_login(
     Customer login.
 
     This endpoint authenticates a customer and returns an access token.
+    The token should be included in the Authorization header for subsequent requests.
 
     Args:
         user_cred (schemas.CustomerLogin): Customer credentials (email and password).
@@ -67,6 +92,26 @@ def customer_login(
 
     Raises:
         HTTPException: If the email doesn't exist or the password is incorrect.
+
+    Example:
+        ```
+        # Request
+        POST /api/login
+        {
+            "email": "user@example.com",
+            "password": "securepassword123"
+        }
+
+        # Response (200 OK)
+        {
+            "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+            "token_type": "bearer"
+        }
+
+        # Usage in subsequent requests
+        GET /api/customers/1
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        ```
     """
     # Email validation is handled by Pydantic's EmailStr
     # Additional validation can be added here if needed
