@@ -27,7 +27,7 @@ def create_access_token(data: dict):
     The token is used for authenticating API requests.
 
     Args:
-        data (dict): The data to encode in the token, typically contains user identification.
+        data (dict): The data to encode in the token, typically contains customer_id.
 
     Returns:
         str: The encoded JWT token.
@@ -51,16 +51,15 @@ def create_access_token(data: dict):
 
 def verify_access_token(token: str, credentials_exception):
     """
-    Verify a JWT access token.
+    Verify and decode a JWT access token.
 
-    This function decodes and validates a JWT token, extracting the customer ID.
 
     Args:
         token (str): The JWT token to verify.
         credentials_exception (HTTPException): Exception to raise if verification fails.
 
     Returns:
-        schemas.TokenData: Object containing the customer ID from the token.
+        schemas.TokenData: The decoded token data containing the customer ID.
 
     Raises:
         HTTPException: If the token is invalid or expired.
@@ -80,19 +79,18 @@ def get_current_user(
     token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
     """
-    Get the current authenticated user.
+    Get the current authenticated user from the JWT token.
 
     This function extracts the current user from the provided JWT token.
     It is typically used as a dependency in protected endpoints to ensure
     that only authenticated users can access them.
 
     Args:
-        token (str, optional): JWT token from the Authorization header. 
-            Defaults to Depends(oauth2_scheme).
+        token (str, optional): The JWT token from the Authorization header. Defaults to Depends(oauth2_scheme).
         db (Session, optional): Database session. Defaults to Depends(get_db).
 
     Returns:
-        models.Customer: The authenticated customer object.
+        models.Customer: The authenticated customer.
 
     Raises:
         HTTPException: If the token is invalid or the user doesn't exist.
@@ -127,3 +125,26 @@ def get_current_user(
     )
 
     return customer
+
+
+def get_admin_user(current_user: models.Customer = Depends(get_current_user)):
+    """
+    Verify that the current user has admin privileges.
+
+    This dependency can be used in route functions that require admin access.
+
+    Args:
+        current_user (models.Customer, optional): The authenticated customer. Defaults to Depends(get_current_user).
+
+    Returns:
+        models.Customer: The authenticated admin customer.
+
+    Raises:
+        HTTPException: If the user doesn't have admin privileges.
+    """
+    if not current_user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized to perform this action. Admin privileges required.",
+        )
+    return current_user
