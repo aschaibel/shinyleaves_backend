@@ -40,6 +40,7 @@ def verify_access_token(token: str, credentials_exception):
     """
     Verify and decode a JWT access token.
 
+
     Args:
         token (str): The JWT token to verify.
         credentials_exception (HTTPException): Exception to raise if verification fails.
