@@ -44,7 +44,6 @@ class CustomerCreate(CustomerBase):
     """
     email: EmailStr
     password: str
-    pass
 
 
 class Customer(CustomerBase):
