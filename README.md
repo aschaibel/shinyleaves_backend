@@ -108,8 +108,8 @@ shinyleaves_backend/
 The API provides the following endpoints:
 
 ### Authentication
-- `POST /api/auth/login`: User login
-- `POST /api/auth/register`: User registration
+- `POST /api/login`: User login
+- `POST /api/register`: User registration
 
 ### Products
 - `GET /api/products/`: Get list of products
@@ -118,26 +118,19 @@ The API provides the following endpoints:
 - `PATCH /api/products/{product_id}`: Update product
 - `DELETE /api/products/{product_id}`: Delete product
 
-### Weed
-- `GET /api/weed/`: Get list of weed strains
-- `GET /api/weed/{weed_id}`: Get weed strain by ID
-- `POST /api/weed/`: Create new weed strains
-- `PATCH /api/weed/{weed_id}`: Update weed strain
-- `DELETE /api/weed/{weed_id}`: Delete weed strain
-
-### Order
-- `GET /api/order/`: Get list of orders
-- `GET /api/order/{order_id}`: Get order by ID
+### Orders
+- `GET /api/orders/`: Get list of orders
+- `GET /api/orders/{order_id}`: Get order by ID
 - `POST /api/order/`: Create new order
-- `PATCH /api/order/{order_id}`: Update order
-- `DELETE /api/order/{order_id}`: Delete order
+- `PATCH /api/orders/{order_id}`: Update order
+- `DELETE /api/orders/{order_id}`: Delete order
 
 ### Customers
-- `GET /api/customer/`: Get list of customers
-- `GET /api/customer/{customer_id}`: Get customer by ID
-- `POST /api/customer/`: Create new customer
-- `PATCH /api/customer/{customer_id}`: Update customer
-- `DELETE /api/customer/{customer_id}`: Delete customer
+- `GET /api/customers/`: Get list of customers
+- `GET /api/customers/{customer_id}`: Get customer by ID
+- `POST /api/customers/`: Create new customer
+- `PATCH /api/customers/{customer_id}`: Update customer
+- `DELETE /api/customers/{customer_id}`: Delete customer
 
 For detailed API documentation, visit the Swagger UI at http://localhost:8000/docs when the application is running.
 

@@ -36,7 +36,7 @@ The ShinyLeaves API is organized around the following resources:
 |--------|----------|-------------|
 | GET | /api/orders/ | Get a list of orders with pagination |
 | GET | /api/orders/{order_id} | Get an order by ID |
-| POST | /api/orders/ | Create a new order |
+| POST | /api/order/ | Create a new order |
 | PATCH | /api/orders/{order_id} | Update an order |
 | DELETE | /api/orders/{order_id} | Delete an order |
 
@@ -44,18 +44,18 @@ The ShinyLeaves API is organized around the following resources:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /api/customer/ | Get a list of customers with pagination |
-| GET | /api/customer/{customer_id} | Get a customer by ID |
-| POST | /api/customer/ | Create a new customer |
-| PATCH | /api/customer/{customer_id} | Update a customer |
-| DELETE | /api/customer/{customer_id} | Delete a customer |
+| GET | /api/customers/ | Get a list of customers with pagination |
+| GET | /api/customers/{customer_id} | Get a customer by ID |
+| POST | /api/customers/ | Create a new customer |
+| PATCH | /api/customers/{customer_id} | Update a customer |
+| DELETE | /api/customers/{customer_id} | Delete a customer |
 
 ### Authentication
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | /api/auth/login | User login |
-| POST | /api/auth/register | User registration |
+| POST | /api/login | User login |
+| POST | /api/register | User registration |
 
 ## Authentication
 
