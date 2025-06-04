@@ -74,7 +74,7 @@ This document contains a comprehensive list of improvement tasks for the ShinyLe
 - [x] Create architecture documentation
 - [x] Add code examples for API usage
 - [x] Document deployment process
-- [ ] Create contributing guidelines
+- [x] Create contributing guidelines
 - [x] Add inline code comments for complex logic
 - [x] Document environment variables
 - [x] Create user documentation
