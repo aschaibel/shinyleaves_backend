@@ -5,7 +5,7 @@ This document contains a comprehensive list of improvement tasks for the ShinyLe
 ## 1. Security Improvements
 
 - [ ] Move database credentials to environment variables in database.py
-- [ ] Implement password hashing for customer passwords
+- [x] Implement password hashing for customer passwords
 - [ ] Add input validation and sanitization for all API endpoints
 - [ ] Create a non-root user in the Dockerfile
 - [ ] Implement proper authentication and authorization system
@@ -16,7 +16,7 @@ This document contains a comprehensive list of improvement tasks for the ShinyLe
 
 ## 2. Architecture Improvements
 
-- [ ] Separate SQLAlchemy models and Pydantic schemas completely
+- [x] Separate SQLAlchemy models and Pydantic schemas completely
 - [ ] Implement proper relationship definitions in SQLAlchemy models
 - [ ] Create a consistent error handling strategy across all modules
 - [ ] Implement dependency injection for services
@@ -30,7 +30,7 @@ This document contains a comprehensive list of improvement tasks for the ShinyLe
 ## 3. Code Quality Improvements
 
 - [ ] Standardize naming conventions (e.g., change "Orders" to "Order")
-- [ ] Add comprehensive docstrings to all functions and classes
+- [x] Add comprehensive docstrings to all functions and classes
 - [ ] Implement consistent error handling across all modules
 - [ ] Fix the email field in Customer model (add Column definition)
 - [ ] Add validation for all input fields in Pydantic models
@@ -55,10 +55,10 @@ This document contains a comprehensive list of improvement tasks for the ShinyLe
 
 ## 5. Testing Improvements
 
-- [ ] Set up pytest as the testing framework
-- [ ] Implement unit tests for all CRUD operations
+- [x] Set up pytest as the testing framework
+- [x] Implement unit tests for all CRUD operations
 - [ ] Add integration tests for API endpoints
-- [ ] Implement test database fixtures
+- [x] Implement test database fixtures
 - [ ] Add test coverage reporting
 - [ ] Implement property-based testing for validation
 - [ ] Create CI pipeline for automated testing
@@ -77,7 +77,7 @@ This document contains a comprehensive list of improvement tasks for the ShinyLe
 - [ ] Create contributing guidelines
 - [x] Add inline code comments for complex logic
 - [x] Document environment variables
-- [ ] Create user documentation
+- [x] Create user documentation
 
 ## 7. DevOps Improvements
 
