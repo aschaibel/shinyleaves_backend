@@ -77,3 +77,44 @@ class CustomerLogin(BaseModel):
     """
     email: EmailStr
     password: str
+
+
+class CustomerUpdate(BaseModel):
+    """
+    Schema for updating customer data.
+
+    Contains only the fields that can be updated by the customer.
+
+    Attributes:
+        name (str): Customer's full name.
+        address (str): Customer's physical address.
+    """
+    name: str
+    address: str
+
+    model_config = {
+        "from_attributes": True,
+        "populate_by_name": True
+    }
+
+
+class CustomerResponse(BaseModel):
+    """
+    Schema for customer response data for regular users.
+
+    Contains only the non-sensitive fields that regular users should see.
+    Does not include id and is_admin fields which should only be visible to admins.
+
+    Attributes:
+        name (str): Customer's full name.
+        address (str): Customer's physical address.
+        email (str): Customer's email address.
+    """
+    name: str
+    address: str
+    email: str
+
+    model_config = {
+        "from_attributes": True,
+        "populate_by_name": True
+    }

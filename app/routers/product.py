@@ -88,7 +88,7 @@ def create_products(
 
 
 @router.get("/products/", response_model=list[schemas.Product])
-def get_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def get_products(skip: int = 0, limit: int = 20, db: Session = Depends(get_db)):
     """
     Get a list of products with pagination.
 
@@ -96,7 +96,7 @@ def get_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
 
     Args:
         skip (int, optional): Number of products to skip. Defaults to 0.
-        limit (int, optional): Maximum number of products to return. Defaults to 10.
+        limit (int, optional): Maximum number of products to return. Defaults to 20.
         db (Session, optional): Database session. Defaults to Depends(get_db).
 
     Returns:
