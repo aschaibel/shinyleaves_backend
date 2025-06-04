@@ -59,3 +59,25 @@ def get_customer_by_id(db: Session, customer_id: int):
     if customer and customer.is_admin is None:
         customer.is_admin = False
     return customer
+
+
+def update_customer(db: Session, customer_id: int, customer_data: customer_schemas.CustomerUpdate):
+    """
+    Update a customer's information.
+
+    Args:
+        db (Session): Database session.
+        customer_id (int): ID of the customer to update.
+        customer_data (customer_schemas.CustomerUpdate): New customer data.
+
+    Returns:
+        models.Customer: The updated customer, or None if not found.
+    """
+    db_customer = db.query(models.Customer).filter(models.Customer.c_id == customer_id).first()
+    if db_customer:
+        update_data = customer_data.model_dump()
+        for key, value in update_data.items():
+            setattr(db_customer, key, value)
+        db.commit()
+        db.refresh(db_customer)
+    return db_customer

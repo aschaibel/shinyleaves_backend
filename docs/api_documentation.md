@@ -45,9 +45,11 @@ The ShinyLeaves API is organized around the following resources:
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | /api/customers/ | Get a list of customers with pagination |
-| GET | /api/customers/{customer_id} | Get a customer by ID |
+| GET | /api/customers/{customer_id} | Get a customer by ID (users can access their own data, admins can access any customer's data) |
+| GET | /api/customers/me | Get the current logged-in customer's information |
 | POST | /api/customers/ | Create a new customer |
 | PATCH | /api/customers/{customer_id} | Update a customer |
+| PATCH | /api/customers/me | Update the current customer's name and address |
 | DELETE | /api/customers/{customer_id} | Delete a customer |
 
 ### Authentication
@@ -204,6 +206,75 @@ Authorization: Bearer <your_token>
 **Response:**
 ```
 204 No Content
+```
+
+### Get Customer by ID
+
+**Request:**
+```http
+GET /api/customers/1 HTTP/1.1
+Host: localhost:8000
+Authorization: Bearer <your_token>
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "name": "John Smith",
+  "address": "123 Main Street, City, Country",
+  "email": "john@example.com",
+  "password": "hashed_password",
+  "is_admin": false
+}
+```
+
+### Get Current Customer
+
+**Request:**
+```http
+GET /api/customers/me HTTP/1.1
+Host: localhost:8000
+Authorization: Bearer <your_token>
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "name": "John Smith",
+  "address": "123 Main Street, City, Country",
+  "email": "john@example.com",
+  "password": "hashed_password",
+  "is_admin": false
+}
+```
+
+### Update Current Customer
+
+**Request:**
+```http
+PATCH /api/customers/me HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+Authorization: Bearer <your_token>
+
+{
+  "name": "John Smith",
+  "address": "123 New Street, City, Country"
+}
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "name": "John Smith",
+  "address": "123 New Street, City, Country",
+  "email": "john@example.com",
+  "password": "hashed_password",
+  "is_admin": false
+}
 ```
 
 ## Rate Limiting
