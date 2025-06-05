@@ -91,6 +91,7 @@ class CustomerUpdate(BaseModel):
     """
     name: str
     address: str
+    email: str
 
     model_config = {
         "from_attributes": True,
