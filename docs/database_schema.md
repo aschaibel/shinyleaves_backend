@@ -66,6 +66,7 @@ The Order table stores information about customer orders.
 |--------|------|-------------|------------|
 | o_id | Integer | Unique identifier for the order | Primary Key, Auto-increment |
 | p_id | Integer | Foreign key to the Product table | Foreign Key, Not Null |
+| c_id | Integer | Foreign key to the Customer table | Foreign Key, Not Null |
 | amount | Integer | Amount of the product ordered | Not Null |
 | order_nr | VARCHAR | Order number for reference | Not Null |
 
@@ -87,10 +88,14 @@ The Customer table stores information about customers.
    - An order contains one product (in a specific amount)
    - A product can be in multiple orders
 
+2. **Order to Customer**: Many-to-One
+   - An order belongs to one customer
+   - A customer can have multiple orders
+
 ## Indexes
 
 - Primary keys on all tables (p_id, o_id, c_id)
-- Foreign key index (p_id in Order)
+- Foreign key indexes (p_id and c_id in Order)
 - Email index in Customer table for quick lookups
 
 ## Notes

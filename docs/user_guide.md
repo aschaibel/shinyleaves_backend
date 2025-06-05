@@ -314,6 +314,7 @@ Content-Type: application/json
 
 {
     "p_id": 2,
+    "c_id": 1,
     "amount": 3,
     "order_nr": "ORD-CUSTOM123"
 }
@@ -324,6 +325,7 @@ Response (200 OK):
 {
     "o_id": 1,
     "p_id": 2,
+    "c_id": 1,
     "amount": 3,
     "order_nr": "ORD-1A2B3C4D"
 }
@@ -348,6 +350,7 @@ Response (200 OK):
     {
         "o_id": 1,
         "p_id": 2,
+        "c_id": 1,
         "amount": 3,
         "order_nr": "ORD-1A2B3C4D"
     }
@@ -368,6 +371,7 @@ Response (200 OK):
 {
     "o_id": 1,
     "p_id": 2,
+    "c_id": 1,
     "amount": 3,
     "order_nr": "ORD-1A2B3C4D"
 }
@@ -462,6 +466,7 @@ To place an order, follow these steps:
 
    {
        "p_id": 2,
+       "c_id": 1,
        "amount": 3,
        "order_nr": "ORD-CUSTOM123"
    }
