@@ -58,7 +58,7 @@ def get_orders(
 
 @router.get("/orders/{order_id}", response_model=schemas.Order)
 def get_order_by_id(
-    order_id: str, 
+    order_id: int, 
     db: Session = Depends(get_db),
     current_user: Customer = Depends(get_current_user)
 ):
@@ -68,7 +68,7 @@ def get_order_by_id(
     This endpoint returns a single order by its ID.
 
     Args:
-        order_id (str): ID of the order to retrieve.
+        order_id (int): ID of the order to retrieve.
         db (Session, optional): Database session. Defaults to Depends(get_db).
         current_user (Customer): The authenticated user.
 

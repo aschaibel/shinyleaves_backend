@@ -17,12 +17,12 @@ The ShinyLeaves database consists of the following main tables:
 |   Product   |       |   Order     |       |  Customer   |
 +-------------+       +-------------+       +-------------+
 | p_id (PK)   |       | o_id (PK)   |       | c_id (PK)   |
-| name        |       | c_id (FK)   |-------| name        |
-| price       |       | p_id (FK)   |----+  | email       |
-| genetic     |       | quantity    |    |  | password    |
-| thc         |       | total_price |    |  | address     |
-| cbd         |       | status      |    |  +-------------+
-| effect      |       +-------------+    |
+| name        |       | p_id (FK)   |----+  | name        |
+| price       |       | amount      |    |  | email       |
+| genetic     |       | order_nr    |    |  | password    |
+| thc         |       +-------------+    |  | address     |
+| cbd         |                          |  +-------------+
+| effect      |                          |
 | slug        |                          |
 +-------------+                          |
                                          |
@@ -64,12 +64,10 @@ The Order table stores information about customer orders.
 
 | Column | Type | Description | Constraints |
 |--------|------|-------------|------------|
-| o_id | VARCHAR | Unique identifier for the order | Primary Key |
-| c_id | Integer | Foreign key to the Customer table | Foreign Key, Not Null |
+| o_id | Integer | Unique identifier for the order | Primary Key, Auto-increment |
 | p_id | Integer | Foreign key to the Product table | Foreign Key, Not Null |
-| quantity | Integer | Quantity of the product ordered | Not Null |
-| total_price | Float | Total price of the order | Not Null |
-| status | String(50) | Status of the order (e.g., Pending, Shipped, Delivered) | Not Null |
+| amount | Integer | Amount of the product ordered | Not Null |
+| order_nr | VARCHAR | Order number for reference | Not Null |
 
 ### Customer
 
@@ -85,18 +83,14 @@ The Customer table stores information about customers.
 
 ## Relationships
 
-1. **Order to Customer**: Many-to-One
-   - An order belongs to one customer
-   - A customer can have multiple orders
-
-2. **Order to Product**: Many-to-One
-   - An order contains one product (in a specific quantity)
+1. **Order to Product**: Many-to-One
+   - An order contains one product (in a specific amount)
    - A product can be in multiple orders
 
 ## Indexes
 
 - Primary keys on all tables (p_id, o_id, c_id)
-- Foreign key indexes (c_id and p_id in Order)
+- Foreign key index (p_id in Order)
 - Email index in Customer table for quick lookups
 
 ## Notes

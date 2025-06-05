@@ -18,12 +18,12 @@ def create_order(db: Session, order: order_schemas.OrderCreate):
     Returns:
         models.Order: The created order with its ID.
     """
-    # Generate a unique order ID
-    order_id = f"ORD-{uuid.uuid4().hex[:8].upper()}"
+    # Generate a unique order number
+    order_nr = f"ORD-{uuid.uuid4().hex[:8].upper()}"
 
-    # Create order with the generated ID
+    # Create order with the generated order number
     order_data = order.model_dump()
-    db_order = models.Order(o_id=order_id, **order_data)
+    db_order = models.Order(order_nr=order_nr, **order_data)
     db.add(db_order)
     db.commit()
     db.refresh(db_order)
@@ -47,7 +47,7 @@ def get_order(db: Session, skip: int = 0, limit: int = 10):
     return db.query(models.Order).offset(skip).limit(limit).all()
 
 
-def get_order_by_id(db: Session, order_id: str):
+def get_order_by_id(db: Session, order_id: int):
     """
     Get an order by ID.
 
@@ -55,7 +55,7 @@ def get_order_by_id(db: Session, order_id: str):
 
     Args:
         db (Session): Database session.
-        order_id (str): ID of the order to retrieve.
+        order_id (int): ID of the order to retrieve.
 
     Returns:
         models.Order: The requested order, or None if not found.

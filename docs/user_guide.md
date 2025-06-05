@@ -313,21 +313,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 Content-Type: application/json
 
 {
-    "customer_id": 1,
-    "product_id": 2,
-    "quantity": 3,
-    "total_price": 74.97
+    "p_id": 2,
+    "amount": 3
 }
 ```
 
 Response (200 OK):
 ```json
 {
-    "o_id": "ORD123",
-    "customer_id": 1,
-    "product_id": 2,
-    "quantity": 3,
-    "total_price": 74.97
+    "o_id": 1,
+    "p_id": 2,
+    "amount": 3,
+    "order_nr": "ORD-1A2B3C4D"
 }
 ```
 
@@ -348,11 +345,10 @@ Response (200 OK):
 ```json
 [
     {
-        "o_id": "ORD123",
-        "customer_id": 1,
-        "product_id": 2,
-        "quantity": 3,
-        "total_price": 74.97
+        "o_id": 1,
+        "p_id": 2,
+        "amount": 3,
+        "order_nr": "ORD-1A2B3C4D"
     }
 ]
 ```
@@ -362,18 +358,17 @@ Response (200 OK):
 Retrieve a specific order by its ID (requires authentication):
 
 ```
-GET /api/orders/ORD123
+GET /api/orders/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 Response (200 OK):
 ```json
 {
-    "o_id": "ORD123",
-    "customer_id": 1,
-    "product_id": 2,
-    "quantity": 3,
-    "total_price": 74.97
+    "o_id": 1,
+    "p_id": 2,
+    "amount": 3,
+    "order_nr": "ORD-1A2B3C4D"
 }
 ```
 
@@ -465,10 +460,8 @@ To place an order, follow these steps:
    Content-Type: application/json
 
    {
-       "customer_id": 1,
-       "product_id": 2,
-       "quantity": 3,
-       "total_price": 74.97
+       "p_id": 2,
+       "amount": 3
    }
    ```
 
