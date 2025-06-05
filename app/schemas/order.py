@@ -6,7 +6,7 @@ class OrderBase(BaseModel):
     amount: int
 
 class OrderCreate(OrderBase):
-    pass
+    order_nr: str
 
 class Order(OrderBase):
     o_id: int

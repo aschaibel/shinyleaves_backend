@@ -314,7 +314,8 @@ Content-Type: application/json
 
 {
     "p_id": 2,
-    "amount": 3
+    "amount": 3,
+    "order_nr": "ORD-CUSTOM123"
 }
 ```
 
@@ -461,7 +462,8 @@ To place an order, follow these steps:
 
    {
        "p_id": 2,
-       "amount": 3
+       "amount": 3,
+       "order_nr": "ORD-CUSTOM123"
    }
    ```
 
