@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+import uuid
 
 from app.models import order as models
 from app.schemas import order as order_schemas
@@ -17,7 +18,12 @@ def create_order(db: Session, order: order_schemas.OrderCreate):
     Returns:
         models.Order: The created order with its ID.
     """
-    db_order = models.Order(**order.model_dump())
+    # Generate a unique order ID
+    order_id = f"ORD-{uuid.uuid4().hex[:8].upper()}"
+
+    # Create order with the generated ID
+    order_data = order.model_dump()
+    db_order = models.Order(o_id=order_id, **order_data)
     db.add(db_order)
     db.commit()
     db.refresh(db_order)
