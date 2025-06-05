@@ -41,7 +41,7 @@ def get_order(db: Session, skip: int = 0, limit: int = 10):
     return db.query(models.Order).offset(skip).limit(limit).all()
 
 
-def get_order_by_id(db: Session, order_id: int):
+def get_order_by_id(db: Session, order_id: str):
     """
     Get an order by ID.
 
@@ -49,7 +49,7 @@ def get_order_by_id(db: Session, order_id: int):
 
     Args:
         db (Session): Database session.
-        order_id (int): ID of the order to retrieve.
+        order_id (str): ID of the order to retrieve.
 
     Returns:
         models.Order: The requested order, or None if not found.

@@ -64,7 +64,7 @@ The Order table stores information about customer orders.
 
 | Column | Type | Description | Constraints |
 |--------|------|-------------|------------|
-| o_id | Integer | Unique identifier for the order | Primary Key, Auto-increment |
+| o_id | VARCHAR | Unique identifier for the order | Primary Key |
 | c_id | Integer | Foreign key to the Customer table | Foreign Key, Not Null |
 | p_id | Integer | Foreign key to the Product table | Foreign Key, Not Null |
 | quantity | Integer | Quantity of the product ordered | Not Null |
