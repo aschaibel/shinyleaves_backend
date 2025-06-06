@@ -63,7 +63,7 @@ The ShinyLeaves API is organized around the following resources:
 
 The API uses JWT (JSON Web Tokens) for authentication. To authenticate:
 
-1. Send a POST request to `/api/auth/login` with your credentials
+1. Send a POST request to `/api/login` with your credentials
 2. Receive a JWT token in the response
 3. Include the token in the `Authorization` header of subsequent requests:
    ```

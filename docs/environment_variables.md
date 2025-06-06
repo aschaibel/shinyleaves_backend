@@ -14,7 +14,12 @@ The following environment variables are required for the application to function
 
 | Variable | Description | Default | Example |
 |----------|-------------|---------|---------|
-| `DATABASE_URL` | Database connection string | `mysql+pymysql://root:password@db:3306/shinyleaves` | `mysql+pymysql://user:password@localhost:3306/shinyleaves` |
+| `DATABASE_URL` | Database connection string (if provided, overrides individual components) | None | `mysql+pymysql://user:password@localhost:3306/shinyleaves` |
+| `DB_USER` | Database username | `user` | `root` |
+| `DB_PASSWORD` | Database password | `password` | `your-secure-password` |
+| `DB_HOST` | Database host | `127.0.0.1` | `db` |
+| `DB_PORT` | Database port | `3306` | `3306` |
+| `DB_NAME` | Database name | `webshop` | `shinyleaves` |
 
 ### Authentication
 

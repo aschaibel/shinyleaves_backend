@@ -217,7 +217,7 @@ def get_db():
 
 ## Authentication Flow
 
-1. **Login Request**: A client sends login credentials to the `/api/auth/login` endpoint
+1. **Login Request**: A client sends login credentials to the `/api/login` endpoint
 2. **Credential Verification**: The auth router verifies the credentials against the database
 3. **Token Generation**: If the credentials are valid, a JWT token is generated and returned to the client
 4. **Authenticated Requests**: The client includes the JWT token in subsequent requests
