@@ -74,10 +74,22 @@ This repository contains the backend API for the ShinyLeaves application, built 
 
 The application uses the following environment variables:
 
-- `DATABASE_URL`: Database connection string
+#### Required Environment Variables
+
+- `DATABASE_URL`: Database connection string (if provided, overrides individual components)
 - `SECRET_KEY`: Secret key for JWT token generation
 - `ALGORITHM`: Algorithm used for JWT token generation (default: HS256)
 - `ACCESS_TOKEN_EXPIRE_MINUTES`: Token expiration time in minutes
+
+#### Optional Environment Variables
+
+- `API_PREFIX`: Prefix for all API endpoints (default: `/api`)
+- `DEBUG`: Enable debug mode (default: `False`)
+- `CORS_ORIGINS`: Allowed origins for CORS (default: `["*"]`)
+- `HOST`: Host to bind the server to (default: `0.0.0.0`)
+- `PORT`: Port to bind the server to (default: `8000`)
+
+For more detailed information about environment variables, see [Environment Variables Documentation](docs/environment_variables.md).
 
 ---
 
@@ -112,27 +124,35 @@ The API provides the following endpoints:
 - `POST /api/register`: User registration
 
 ### Products
-- `GET /api/products/`: Get list of products
+- `GET /api/products/`: Get list of products with pagination
 - `GET /api/products/{product_id}`: Get product by ID
-- `POST /api/products/`: Create new products
-- `PATCH /api/products/{product_id}`: Update product
-- `DELETE /api/products/{product_id}`: Delete product
+- `POST /api/products/`: Create multiple products (admin only)
+- `PATCH /api/products/{product_id}`: Update product (admin only)
+- `DELETE /api/products/{product_id}`: Delete product (admin only)
 
 ### Orders
-- `GET /api/orders/`: Get list of orders
+- `GET /api/orders/`: Get list of orders with pagination
 - `GET /api/orders/{order_id}`: Get order by ID
 - `POST /api/order/`: Create new order
 - `PATCH /api/orders/{order_id}`: Update order
 - `DELETE /api/orders/{order_id}`: Delete order
 
 ### Customers
-- `GET /api/customers/`: Get list of customers
-- `GET /api/customers/{customer_id}`: Get customer by ID
+- `GET /api/customers/`: Get list of customers with pagination (admin only)
+- `GET /api/customers/{customer_id}`: Get customer by ID (users can access their own data, admins can access any customer's data)
+- `GET /api/customers/me`: Get the current logged-in customer's information
 - `POST /api/customers/`: Create new customer
 - `PATCH /api/customers/{customer_id}`: Update customer
+- `PATCH /api/customers/me`: Update the current customer's name and address
 - `DELETE /api/customers/{customer_id}`: Delete customer
 
-For detailed API documentation, visit the Swagger UI at http://localhost:8000/docs when the application is running.
+### Additional Features
+
+- **Pagination**: List endpoints support pagination with `skip` and `limit` query parameters
+- **Rate Limiting**: To prevent abuse, the API implements rate limiting
+- **Authentication**: The API uses JWT (JSON Web Tokens) for authentication
+
+For detailed API documentation, visit the Swagger UI at http://localhost:8000/docs when the application is running, or see the [API Documentation](docs/api_documentation.md).
 
 ---
 
