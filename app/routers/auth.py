@@ -34,20 +34,18 @@ def customer_register(customer: schemas.CustomerCreate, db: Session = Depends(ge
         {
             "email": "user@example.com",
             "password": "securepassword123",
-            "first_name": "John",
-            "last_name": "Doe",
-            "phone": "+1234567890",
+            "name": "John Doe",
             "address": "123 Main St, City"
         }
 
         # Response (201 Created)
         {
-            "c_id": 1,
+            "id": 1,
             "email": "user@example.com",
-            "first_name": "John",
-            "last_name": "Doe",
-            "phone": "+1234567890",
-            "address": "123 Main St, City"
+            "name": "John Doe",
+            "address": "123 Main St, City",
+            "password": "hashed_password",
+            "is_admin": false
         }
         ```
     """

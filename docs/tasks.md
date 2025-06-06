@@ -32,7 +32,7 @@ This document contains a comprehensive list of improvement tasks for the ShinyLe
 - [ ] Standardize naming conventions (e.g., change "Orders" to "Order")
 - [x] Add comprehensive docstrings to all functions and classes
 - [ ] Implement consistent error handling across all modules
-- [ ] Fix the email field in Customer model (add Column definition)
+- [x] Fix the email field in Customer model (add Column definition)
 - [ ] Add validation for all input fields in Pydantic models
 - [ ] Implement consistent return types for all functions
 - [ ] Add type hints to all functions and variables

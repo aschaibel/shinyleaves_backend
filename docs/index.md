@@ -34,12 +34,10 @@ The codebase includes comprehensive docstrings for all classes and functions. Ke
 - **Routers** - API endpoints and request handling
 - **CRUD** - Database operations and business logic
 
-## Missing Documentation
+## Additional Documentation
 
-The following documentation is planned but not yet implemented:
-
-- Contributing Guidelines - Guidelines for contributing to the project
-- User Documentation - Documentation for end users of the application
+- [Contributing Guidelines](../CONTRIBUTING.md) - Guidelines for contributing to the project
+- [User Guide](user_guide.md) - Documentation for end users of the application
 
 ## Support
 

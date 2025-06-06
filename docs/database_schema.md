@@ -17,28 +17,14 @@ The ShinyLeaves database consists of the following main tables:
 |   Product   |       |   Order     |       |  Customer   |
 +-------------+       +-------------+       +-------------+
 | p_id (PK)   |       | o_id (PK)   |       | c_id (PK)   |
-| name        |       | p_id (FK)   |----+  | name        |
-| price       |       | amount      |    |  | email       |
-| genetic     |       | order_nr    |    |  | password    |
-| thc         |       +-------------+    |  | address     |
-| cbd         |                          |  +-------------+
-| effect      |                          |
-| slug        |                          |
-+-------------+                          |
-                                         |
-                                         |
-                                +-------------+
-                                |   Product   |
-                                +-------------+
-                                | p_id (PK)   |
-                                | name        |
-                                | price       |
-                                | genetic     |
-                                | thc         |
-                                | cbd         |
-                                | effect      |
-                                | slug        |
-                                +-------------+
+| name        |<----+-| p_id (FK)   |       | name        |
+| price       |     | | c_id (FK)   |------>| email       |
+| genetic     |     | | amount      |       | password    |
+| thc         |     | | order_nr    |       | address     |
+| cbd         |     | +-------------+       | is_admin    |
+| effect      |     |                       +-------------+
+| slug        |     |
++-------------+     |
 ```
 
 ## Table Descriptions

@@ -13,6 +13,10 @@
    - [Products](#products)
    - [Orders](#orders)
    - [Customer Account](#customer-account)
+     - [Get Current Customer Profile](#get-current-customer-profile)
+     - [Update Current Customer Profile](#update-current-customer-profile)
+     - [Get Customer Profile (Admin Only)](#get-customer-profile-admin-only)
+     - [Get All Customers (Admin Only)](#get-all-customers-admin-only)
 5. [Common Use Cases](#common-use-cases)
    - [Browsing Products](#browsing-products)
    - [Placing an Order](#placing-an-order)
@@ -86,9 +90,7 @@ Content-Type: application/json
 {
     "email": "user@example.com",
     "password": "securepassword123",
-    "first_name": "John",
-    "last_name": "Doe",
-    "phone": "+1234567890",
+    "name": "John Doe",
     "address": "123 Main St, City"
 }
 ```
@@ -97,12 +99,12 @@ If successful, you'll receive a response with status code 201 and the created cu
 
 ```json
 {
-    "c_id": 1,
+    "id": 1,
+    "name": "John Doe",
+    "address": "123 Main St, City",
     "email": "user@example.com",
-    "first_name": "John",
-    "last_name": "Doe",
-    "phone": "+1234567890",
-    "address": "123 Main St, City"
+    "password": "hashed_password",
+    "is_admin": false
 }
 ```
 
@@ -379,6 +381,75 @@ Response (200 OK):
 
 ### Customer Account
 
+> **Note:** The customer profile endpoints return different JSON formats depending on the endpoint and user role. Regular user endpoints use a simplified format with only the `name`, `address`, and `email` fields, while admin endpoints include additional fields like `id`, `password`, and `is_admin`.
+
+#### Get Current Customer Profile
+
+Retrieve the profile information of the currently authenticated customer:
+
+```
+GET /api/customers/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+Response (200 OK):
+```json
+{
+    "name": "John Doe",
+    "address": "123 Main St, City",
+    "email": "user@example.com"
+}
+```
+
+For admin users, the response includes additional fields:
+```json
+{
+    "id": 1,
+    "name": "John Doe",
+    "address": "123 Main St, City",
+    "email": "user@example.com",
+    "password": "hashed_password",
+    "is_admin": true
+}
+```
+
+#### Update Current Customer Profile
+
+Update the profile information of the currently authenticated customer:
+
+```
+PATCH /api/customers/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{
+    "name": "John Smith",
+    "address": "456 Oak St, Town",
+    "email": "john.smith@example.com"
+}
+```
+
+Response (200 OK):
+```json
+{
+    "name": "John Smith",
+    "address": "456 Oak St, Town",
+    "email": "john.smith@example.com"
+}
+```
+
+For admin users, the response includes additional fields:
+```json
+{
+    "id": 1,
+    "name": "John Smith",
+    "address": "456 Oak St, Town",
+    "email": "john.smith@example.com",
+    "password": "hashed_password",
+    "is_admin": true
+}
+```
+
 #### Get Customer Profile (Admin Only)
 
 Retrieve a specific customer by ID (requires admin privileges):
@@ -391,12 +462,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 Response (200 OK):
 ```json
 {
-    "c_id": 1,
+    "id": 1,
+    "name": "John Doe",
+    "address": "123 Main St, City",
     "email": "user@example.com",
-    "first_name": "John",
-    "last_name": "Doe",
-    "phone": "+1234567890",
-    "address": "123 Main St, City"
+    "password": "hashed_password",
+    "is_admin": false
 }
 ```
 
@@ -417,12 +488,12 @@ Response (200 OK):
 ```json
 [
     {
-        "c_id": 1,
+        "id": 1,
+        "name": "John Doe",
+        "address": "123 Main St, City",
         "email": "user@example.com",
-        "first_name": "John",
-        "last_name": "Doe",
-        "phone": "+1234567890",
-        "address": "123 Main St, City"
+        "password": "hashed_password",
+        "is_admin": false
     }
 ]
 ```
