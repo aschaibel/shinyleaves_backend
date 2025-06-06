@@ -41,7 +41,7 @@ def get_customer_me(current_user: Customer = Depends(get_current_user)):
     Get the current logged-in customer's information.
 
     This endpoint returns the data of the currently authenticated customer.
-    For regular users, sensitive fields (id and is_admin) are excluded.
+    For regular users, sensitive field is_admin is excluded but c_id is included.
     For admin users, all fields are included.
 
     Args:
@@ -58,6 +58,7 @@ def get_customer_me(current_user: Customer = Depends(get_current_user)):
         # Override the response_model for non-admin users
         from fastapi.responses import JSONResponse
         return JSONResponse(content={
+            "id": current_user.c_id,
             "name": current_user.name,
             "address": current_user.address,
             "email": current_user.email
@@ -75,7 +76,7 @@ def get_customer_by_id(
 
     This endpoint returns a single customer by its ID.
     Regular users can only access their own data, while admins can access any customer's data.
-    For regular users, sensitive fields (id and is_admin) are excluded.
+    For regular users, sensitive field is_admin is excluded but c_id is included.
     For admin users, all fields are included.
 
     Args:
@@ -108,6 +109,7 @@ def get_customer_by_id(
         # Override the response_model for non-admin users
         from fastapi.responses import JSONResponse
         return JSONResponse(content={
+            "id": db_customer.c_id,
             "name": db_customer.name,
             "address": db_customer.address,
             "email": db_customer.email
@@ -124,7 +126,7 @@ def update_customer_me(
     Update the current customer's information.
 
     This endpoint allows a logged-in customer to update their name and address.
-    For regular users, sensitive fields (id and is_admin) are excluded from the response.
+    For regular users, sensitive field is_admin is excluded but c_id is included in the response.
     For admin users, all fields are included in the response.
 
     Args:
@@ -149,6 +151,7 @@ def update_customer_me(
         # Override the response_model for non-admin users
         from fastapi.responses import JSONResponse
         return JSONResponse(content={
+            "id": updated_customer.c_id,
             "name": updated_customer.name,
             "address": updated_customer.address,
             "email": updated_customer.email

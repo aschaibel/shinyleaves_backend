@@ -103,14 +103,16 @@ class CustomerResponse(BaseModel):
     """
     Schema for customer response data for regular users.
 
-    Contains only the non-sensitive fields that regular users should see.
-    Does not include id and is_admin fields which should only be visible to admins.
+    Contains the non-sensitive fields that regular users should see.
+    Now includes the c_id field as required.
 
     Attributes:
+        c_id (int): Customer ID, aliased as "id" in API responses.
         name (str): Customer's full name.
         address (str): Customer's physical address.
         email (str): Customer's email address.
     """
+    c_id: int = Field(alias="id")
     name: str
     address: str
     email: str
