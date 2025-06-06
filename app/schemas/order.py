@@ -2,15 +2,16 @@ from pydantic import BaseModel
 
 
 class OrderBase(BaseModel):
-    c_id: int
     p_id: int
-    amount: float
+    c_id: int
+    amount: int
 
 class OrderCreate(OrderBase):
-    pass
+    order_nr: str
 
 class Order(OrderBase):
     o_id: int
+    order_nr: str
 
     model_config = {
         "from_attributes": True

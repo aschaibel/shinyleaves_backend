@@ -17,7 +17,9 @@ def create_order(db: Session, order: order_schemas.OrderCreate):
     Returns:
         models.Order: The created order with its ID.
     """
-    db_order = models.Order(**order.model_dump())
+    # Create order with the order number from the request
+    order_data = order.model_dump()
+    db_order = models.Order(**order_data)
     db.add(db_order)
     db.commit()
     db.refresh(db_order)

@@ -313,10 +313,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 Content-Type: application/json
 
 {
-    "customer_id": 1,
-    "product_id": 2,
-    "quantity": 3,
-    "total_price": 74.97
+    "p_id": 2,
+    "c_id": 1,
+    "amount": 3,
+    "order_nr": "ORD-CUSTOM123"
 }
 ```
 
@@ -324,10 +324,10 @@ Response (200 OK):
 ```json
 {
     "o_id": 1,
-    "customer_id": 1,
-    "product_id": 2,
-    "quantity": 3,
-    "total_price": 74.97
+    "p_id": 2,
+    "c_id": 1,
+    "amount": 3,
+    "order_nr": "ORD-1A2B3C4D"
 }
 ```
 
@@ -349,10 +349,10 @@ Response (200 OK):
 [
     {
         "o_id": 1,
-        "customer_id": 1,
-        "product_id": 2,
-        "quantity": 3,
-        "total_price": 74.97
+        "p_id": 2,
+        "c_id": 1,
+        "amount": 3,
+        "order_nr": "ORD-1A2B3C4D"
     }
 ]
 ```
@@ -370,10 +370,10 @@ Response (200 OK):
 ```json
 {
     "o_id": 1,
-    "customer_id": 1,
-    "product_id": 2,
-    "quantity": 3,
-    "total_price": 74.97
+    "p_id": 2,
+    "c_id": 1,
+    "amount": 3,
+    "order_nr": "ORD-1A2B3C4D"
 }
 ```
 
@@ -451,7 +451,7 @@ To place an order, follow these steps:
    ```
    POST /api/login
    Content-Type: application/json
-   
+
    {
        "email": "user@example.com",
        "password": "securepassword123"
@@ -463,12 +463,12 @@ To place an order, follow these steps:
    POST /api/order/
    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    Content-Type: application/json
-   
+
    {
-       "customer_id": 1,
-       "product_id": 2,
-       "quantity": 3,
-       "total_price": 74.97
+       "p_id": 2,
+       "c_id": 1,
+       "amount": 3,
+       "order_nr": "ORD-CUSTOM123"
    }
    ```
 
